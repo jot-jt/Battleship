@@ -6,14 +6,18 @@ public class Player {
     private String name;
     /** Gameboard representing this player's ships */
     private Board gameboard;
+    /** Gameboard representing enemy player's ships */
+    private Board enemyBoard;
 
     /** Create a player instance.
      *
-     * @param name  player's username
-     * @param board gameboard that represents this player's ships */
-    public Player(String name, Board board) {
+     * @param name       player's username
+     * @param board      gameboard that represents this player's ships
+     * @param enemyBoard gameboard that represents thie enemy's ships */
+    public Player(String name, Board board, Board enemyBoard) {
         this.name= name;
         gameboard= board;
+        this.enemyBoard= enemyBoard;
     }
 
     /** @return the player's gameboard */

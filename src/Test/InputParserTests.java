@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import gamelogic.Direction;
-import main.InputParser;
+import ui.InputParser;
 
-/** Tests for main.InputParser */
+/** Tests for ui.InputParser */
 class InputParserTests {
 
     @Test
     void parseValidTileE10() {
-        int[] res= InputParser.parseTile(" E10 ");
+        int[] res= InputParser.parseTile(" E10 ", 10, 10);
 
         int[] expected= new int[2];
         expected[0]= 4;
@@ -23,7 +23,7 @@ class InputParserTests {
 
     @Test
     void parseValidTileC2() {
-        int[] res= InputParser.parseTile(" C2");
+        int[] res= InputParser.parseTile(" C2", 10, 10);
 
         int[] expected= new int[2];
         expected[0]= 2;
@@ -33,31 +33,31 @@ class InputParserTests {
 
     @Test
     void parseInvalidTileC2A() {
-        int[] res= InputParser.parseTile(" C2A");
+        int[] res= InputParser.parseTile(" C2A", 10, 10);
         assertArrayEquals(null, res);
     }
 
     @Test
     void parseInvalidTileEmpty() {
-        int[] res= InputParser.parseTile("   ");
+        int[] res= InputParser.parseTile("   ", 10, 10);
         assertArrayEquals(null, res);
     }
 
     @Test
     void parseInvalidTile12A() {
-        int[] res= InputParser.parseTile(" 12A  ");
+        int[] res= InputParser.parseTile(" 12A  ", 10, 10);
         assertArrayEquals(null, res);
     }
 
     @Test
     void parseInvalidTileA() {
-        int[] res= InputParser.parseTile(" A  ");
+        int[] res= InputParser.parseTile(" A  ", 10, 10);
         assertArrayEquals(null, res);
     }
 
     @Test
     void parseInvalidTile1() {
-        int[] res= InputParser.parseTile(" 1  ");
+        int[] res= InputParser.parseTile(" 1  ", 10, 10);
         assertArrayEquals(null, res);
     }
 

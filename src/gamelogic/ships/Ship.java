@@ -14,6 +14,10 @@ public abstract class Ship {
      * Entry of 0 means undamaged, 1 represents damaged/hit. */
     protected int[] shipCondition;
 
+    /** Creates a ship instance.
+     *
+     * @param name   Name of the ship
+     * @param length Length of the ship in tiles */
     public Ship(String name, int length) {
         this.name= name;
         shipCondition= new int[length];

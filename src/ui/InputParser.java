@@ -1,4 +1,4 @@
-package main;
+package ui;
 
 import gamelogic.Direction;
 
@@ -9,9 +9,13 @@ public class InputParser {
      * User input is in the form of a letter followed by a number, ex. "C10". Case
      * insensitive.
      *
+     * @param input     User input string
+     * @param maxHeight Maximum board width
+     * @param maxWidth  Maximum board height
+     *
      * @return pair where first element is y-coord, second element is x-coord, or null if
-     *         unparseable. */
-    public static int[] parseTile(String input) {
+     *         unparseable/out-of-bounds. */
+    public static int[] parseTile(String input, int maxHeight, int maxWidth) {
         input= input.strip().toLowerCase();
 
         if (input.isEmpty()) return null;
@@ -27,6 +31,9 @@ public class InputParser {
             return null;
         }
 
+        if (xIndex < 0 || yIndex < 0 || xIndex >= maxWidth || yIndex >= maxHeight)
+            return null;
+
         int[] coords= new int[2];
         coords[0]= yIndex;
         coords[1]= xIndex;
@@ -35,6 +42,8 @@ public class InputParser {
 
     /** Parses a user input string into a direction <br>
      * User input is in the form of "N", "E", "S", or "W". Case insensitive.
+     *
+     * @param input User input string
      *
      * @return a direction from gamelogic.Direction, or null if unparseable */
     public static Direction parseDirection(String input) {

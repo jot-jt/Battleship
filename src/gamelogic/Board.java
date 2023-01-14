@@ -50,14 +50,14 @@ public class Board {
             y= y - offset;
         case DOWN:
             for (int j= y; j < y + length; j++ ) {
-                if (j >= board.length || board[j][x] != 0) return false;
+                if (j < 0 || j >= board.length || board[j][x] != 0) return false;
             }
             return true;
         case LEFT:
             x= x - offset;
         case RIGHT:
             for (int i= x; i < x + length; i++ ) {
-                if (i >= board[0].length || board[y][i] != 0) return false;
+                if (i < 0 || i >= board[0].length || board[y][i] != 0) return false;
             }
             return true;
         }
@@ -110,5 +110,15 @@ public class Board {
             return true;
         }
         return false;
+    }
+
+    /** @return board's width */
+    public int getWidth() {
+        return board[0].length;
+    }
+
+    /** @return board's height */
+    public int getHeight() {
+        return board.length;
     }
 }
