@@ -1,4 +1,4 @@
-package main;
+
 
 import gamelogic.Board;
 import gamelogic.Player;
