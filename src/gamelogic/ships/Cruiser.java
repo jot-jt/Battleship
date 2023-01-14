@@ -1,4 +1,4 @@
-package Background.Ships;
+package gamelogic.ships;
 
 public class Cruiser extends Ship {
 

@@ -1,4 +1,4 @@
-package Background;
+package gamelogic;
 
 public enum Direction {
     UP,

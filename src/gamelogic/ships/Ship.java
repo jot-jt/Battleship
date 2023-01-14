@@ -1,6 +1,6 @@
-package Background.Ships;
+package gamelogic.ships;
 
-import Background.Direction;
+import gamelogic.Direction;
 
 public abstract class Ship {
     protected String name;

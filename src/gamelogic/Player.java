@@ -1,4 +1,4 @@
-package Background;
+package gamelogic;
 
 /** Represents a player in the game */
 public class Player {
