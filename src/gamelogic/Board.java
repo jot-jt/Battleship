@@ -13,8 +13,8 @@ public class Board {
      * index of the corresponding ship in this.ships. <br>
      * Tiles with values of 0 represent an empty, untouched tile. <br>
      * Values of -1 represent misses.<br>
-     * Coordinates are in the format (y,x). (0,0) is defined to be the top left corner of
-     * the board. The y-axis increases down. The x-axis increases right. */
+     * Array coordinates are in the format (y,x). (0,0) is defined to be the top left
+     * corner of the board. The y-axis increases down. The x-axis increases right. */
     public int[][] board;
 
     /** Holds all ships on the gameboard. */

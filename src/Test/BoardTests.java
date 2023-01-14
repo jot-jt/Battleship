@@ -10,6 +10,7 @@ import gamelogic.Direction;
 import gamelogic.ships.Destroyer;
 import gamelogic.ships.Submarine;
 
+/** Tests for gamelogic.Board */
 class BoardTests {
 
     @Test

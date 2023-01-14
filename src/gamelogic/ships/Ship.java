@@ -24,4 +24,8 @@ public abstract class Ship {
         return shipCondition.length;
     }
 
+    /** @return name of this ship */
+    public String getName() {
+        return name;
+    }
 }
