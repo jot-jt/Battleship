@@ -2,23 +2,36 @@ package Background;
 
 import java.util.ArrayList;
 
+import Background.Ships.Ship;
+
 /** Represents the gameboard that holds ship location, as well as enemy hits, misses, and
- * sinks for a single player. */
+ * sinks for one player. */
 public class Board {
-    /** Represents a player's gameboard. <br>
-     * Values > 1 represents a ship corresponding to the 1-based index of the ship in
-     * this.ships. <br>
-     * Value of 0 represents an empty, untouched tile. <br>
-     * Value of -1 represents a miss. */
+
+    /** Represents a player's gameboard where each entry is a game tile. <br>
+     * Tiles with values >= 1 represent part of a ship. Specific value is the 1-based
+     * index of the corresponding ship in this.ships. <br>
+     * Tiles with values of 0 represent an empty, untouched tile. <br>
+     * Values of -1 represent misses. */
     private int[][] board;
+
+    /** Holds all ships on the gameboard. */
     private ArrayList<Ship> ships;
 
-    public Board(int length, int width) {
-        board= new int[length][width];
+    /** Constants to represent tile state */
+    public final int EMPTY= 0;
+    public final int MISS= -1;
+
+    /** Creates a gameboard instance.
+     *
+     * @param height size of the board's vertical axis
+     * @param width  size of the board's horizontal axis */
+    public Board(int height, int width) {
+        board= new int[height][width];
     }
 
-    /** Checks whether the specified board tiles are empty, starting from a specific tile
-     * and moving along a direction for a certain length. <br>
+    /** Checks whether the specified board tiles are empty. Begins from a specific tile
+     * and continues a certain number of tiles along one direction. <br>
      *
      * @param x         x-coordinate of the beginning tile
      * @param y         y-coordinate of the beginning tile
@@ -47,8 +60,8 @@ public class Board {
         return false;
     }
 
-    /** Sets the value of all specified board tiles to a target value, starting from a
-     * specific tile and moving along a direction for a certain length. <br>
+    /** Sets the value of all specified board tiles to a target value. Begins from a
+     * specific tile and continues a certain number of tiles along one direction. <br>
      *
      * @param x           x-coordinate of the beginning tile
      * @param y           y-coordinate of the beginning tile
@@ -78,9 +91,9 @@ public class Board {
     /** Adds a ship onto the player's gameboard.
      *
      * @param ship      ship to add to the gameboard
-     * @param x         x-coordinate of the beginning tile
-     * @param y         y-coordinate of the beginning tile
-     * @param direction direction from the beginning tile to place the ship in
+     * @param x         x-coordinate of the tile to place one end of ship
+     * @param y         y-coordinate of the tile to place one end of ship
+     * @param direction direction from the specified tile to place the ship in
      *
      * @return True if success, False otherwise */
     public Boolean addShip(Ship ship, int x, int y, Direction direction) {
