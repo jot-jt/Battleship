@@ -39,6 +39,7 @@ public class ShipPlacer {
     private static int[] askShipLocation(Scanner scan, Player player, Ship ship) {
         int[] coords= null;
         while (coords == null) {
+            System.out.println(player.getBoard().toString(false));
             String locQuestion= String.format(
                 "%s: What tile to place one end of the %s (length %d)?",
                 player.getName(), ship.getName(), ship.getLength());
@@ -67,6 +68,7 @@ public class ShipPlacer {
 
         Direction direction= null;
         while (direction == null) {
+            System.out.println(player.getBoard().toString(false));
             String dirQuestion= String.format(
                 "%s: Which direction to point the %s towards? (N/E/S/W)",
                 player.getName(), ship.getName());
@@ -84,18 +86,18 @@ public class ShipPlacer {
 
     /** Begins user interface for player to add ships to their gameboard
      *
+     * @param scan    input reader
      * @param player: the user to ask */
-    public static void placeShipsOnBoard(Player player) {
+    public static void placeShipsOnBoard(Scanner scan, Player player) {
         ArrayList<Ship> ships= generateShips();
-
-        Scanner scan= new Scanner(System.in);
 
         for (int i= 0; i < ships.size(); i++ ) {
             Ship ship= ships.get(i);
 
             Boolean success= false;
             while (!success) {
-                Direction dir= null;
+                Direction dir= Direction.DOWN; // DOWN instead of null for submarine
+                                               // handling
                 int[] coords= askShipLocation(scan, player, ship);
                 if (!(ship instanceof Submarine)) {
                     dir= askShipDirection(scan, player, ship);
@@ -106,6 +108,5 @@ public class ShipPlacer {
                     System.out.println("Invalid ship position. Please try again.");
             }
         }
-        scan.close();
     }
 }

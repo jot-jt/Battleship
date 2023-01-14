@@ -72,7 +72,7 @@ public class Board {
      * @param direction   direction starting from the beginning tile to set values for
      * @param length      number of tiles to check in the given direction (>= 0)
      * @param targetValue the number to set all tiles in the specified range to */
-    private void setTile(int y, int x, Direction direction, int length,
+    public void setTile(int y, int x, Direction direction, int length,
         int targetValue) {
         int offset= length - 1;
         switch (direction) {
@@ -93,7 +93,17 @@ public class Board {
         }
     }
 
-    /** Adds a ship onto the player's gameboard.
+    /** Sets the value of the specified board tiles to a target value.
+     *
+     * @param y           y-coordinate of the beginning tile
+     * @param x           x-coordinate of the beginning tile
+     * @param targetValue the number to set all tiles in the specified range to */
+    public void setTile(int y, int x, int targetValue) {
+        setTile(y, x, Direction.DOWN, 1, targetValue);
+    }
+
+    /** Adds a ship onto the player's gameboard, as well as sets the ship's properties
+     * based on the board position.
      *
      * @param ship      ship to add to the gameboard
      * @param y         y-coordinate of the tile to place one end of ship
@@ -105,6 +115,24 @@ public class Board {
         boolean tilesEmpty= checkTilesEmpty(y, x, direction, ship.getLength());
         if (tilesEmpty) {
             ships.add(ship);
+            switch (direction) {
+            case DOWN:
+            case RIGHT:
+                ship.setY(y);
+                ship.setX(x);
+                ship.setDirection(direction);
+                break;
+            case LEFT:
+                ship.setX(x - ship.getLength() + 1);
+                ship.setY(y);
+                ship.setDirection(Direction.RIGHT);
+                break;
+            case UP:
+                ship.setX(x);
+                ship.setY(y - ship.getLength() + 1);
+                ship.setDirection(Direction.DOWN);
+                break;
+            }
             int ship_index= ships.size(); // 1-based index
             setTile(y, x, direction, ship.getLength(), ship_index);
             return true;
@@ -120,5 +148,50 @@ public class Board {
     /** @return board's height */
     public int getHeight() {
         return board.length;
+    }
+
+    /** @param enemyPOV true if enemy is viewing this board
+     * @return the string representation of the gameboard */
+    public String toString(Boolean enemyPOV) {
+        StringBuilder sb= new StringBuilder();
+
+        // horizontal-axis markers
+        sb.append("    1  2  3  4  5  6  7  8  9  10\n");
+
+        for (int i= 0; i < board.length; i++ ) {
+            int[] line= board[i];
+
+            // vertical-axis marker
+            int char_int= 'A' + i;
+            sb.append(" ");
+            sb.append((char) char_int);
+            sb.append(" ");
+
+            for (int j= 0; j < line.length; j++ ) {
+                switch (line[j]) {
+                case EMPTY:
+                    sb.append(" _ ");
+                    break;
+                case MISS:
+                    sb.append(" M ");
+                    break;
+                default: // ship
+                    int shipIndex= line[j] - 1;
+                    Ship ship= ships.get(shipIndex);
+                    if (ship.isSunk()) {
+                        sb.append(" S ");
+                    } else if (ship.isDamagedAt(i, j)) {
+                        sb.append(" X ");
+                    } else {
+                        if (enemyPOV)
+                            sb.append(" _ ");
+                        else
+                            sb.append(" B ");
+                    }
+                }
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
