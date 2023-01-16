@@ -62,15 +62,15 @@ public class GameUI {
         System.out.println("====================\n\n");
 
         // Print boards
-        String ownBoard= current.getBoard().toString(false);
-        System.out.println("Your board:");
-        System.out.println(ownBoard);
-
-        System.out.print("\n");
-
         System.out.println("Enemy board:");
         String enemyBoard= enemy.getBoard().toString(true);
         System.out.println(enemyBoard);
+
+        System.out.print("\n");
+
+        String ownBoard= current.getBoard().toString(false);
+        System.out.println("Your board:");
+        System.out.println(ownBoard);
 
         System.out.print("\n");
 

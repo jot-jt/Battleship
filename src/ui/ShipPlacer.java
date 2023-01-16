@@ -22,7 +22,7 @@ public class ShipPlacer {
 //        unplaced_ships.add(new Cruiser());
 //        unplaced_ships.add(new Destroyer());
         unplaced_ships.add(new Destroyer());
-//        unplaced_ships.add(new Submarine());
+        unplaced_ships.add(new Submarine());
 //        unplaced_ships.add(new Submarine());
         return unplaced_ships;
     }
