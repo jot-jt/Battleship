@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import gamelogic.Board;
 import gamelogic.Player;
+import ui.GameUI;
 import ui.ShipPlacer;
 
 public class Main {
@@ -22,6 +23,8 @@ public class Main {
 
         ShipPlacer.placeShipsOnBoard(scan, playerOne);
         ShipPlacer.placeShipsOnBoard(scan, playerTwo);
+
+        GameUI.executeGame(scan, playerOne, playerTwo);
 
         scan.close();
     }

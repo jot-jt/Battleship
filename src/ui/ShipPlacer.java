@@ -5,9 +5,6 @@ import java.util.Scanner;
 
 import gamelogic.Direction;
 import gamelogic.Player;
-import gamelogic.ships.AircraftCarrier;
-import gamelogic.ships.Battleship;
-import gamelogic.ships.Cruiser;
 import gamelogic.ships.Destroyer;
 import gamelogic.ships.Ship;
 import gamelogic.ships.Submarine;
@@ -20,13 +17,13 @@ public class ShipPlacer {
      *         Submarines */
     private static ArrayList<Ship> generateShips() {
         ArrayList<Ship> unplaced_ships= new ArrayList<>();
-        unplaced_ships.add(new AircraftCarrier());
-        unplaced_ships.add(new Battleship());
-        unplaced_ships.add(new Cruiser());
+//        unplaced_ships.add(new AircraftCarrier());
+//        unplaced_ships.add(new Battleship());
+//        unplaced_ships.add(new Cruiser());
+//        unplaced_ships.add(new Destroyer());
         unplaced_ships.add(new Destroyer());
-        unplaced_ships.add(new Destroyer());
-        unplaced_ships.add(new Submarine());
-        unplaced_ships.add(new Submarine());
+//        unplaced_ships.add(new Submarine());
+//        unplaced_ships.add(new Submarine());
         return unplaced_ships;
     }
 
@@ -52,7 +49,7 @@ public class ShipPlacer {
             coords= InputParser.parseTile(tileAnswer, height, width);
 
             if (coords == null) {
-                System.out.println("Invalid tile. Please try again.");
+                System.out.println("Invalid tile. Please try again.\n\n");
             }
         }
         return coords;
@@ -78,7 +75,7 @@ public class ShipPlacer {
             direction= InputParser.parseDirection(directionAnswer);
 
             if (direction == null) {
-                System.out.println("Invalid direction. Please try again.");
+                System.out.println("Invalid direction. Please try again.\n\n");
             }
         }
         return direction;
@@ -105,8 +102,10 @@ public class ShipPlacer {
 
                 success= player.getBoard().addShip(ship, coords[0], coords[1], dir);
                 if (!success)
-                    System.out.println("Invalid ship position. Please try again.");
+                    System.out.println("Invalid ship position. Please try again.\n\n");
             }
+            System.out.println("Ship successfully placed.\n\n");
         }
+
     }
 }

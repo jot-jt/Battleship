@@ -9,9 +9,9 @@ import gamelogic.ships.Ship;
 public class Board {
 
     /** Represents a player's gameboard where each entry is a game tile. <br>
-     * Tiles with values >= 1 represent part of a ship. Specific value is the 1-based
+     * Tiles with values >= 1 represent part of a ship. Specific tile value is the 1-based
      * index of the corresponding ship in this.ships. <br>
-     * Tiles with values of 0 represent an empty, untouched tile. <br>
+     * Tiles with values of 0 represent an untouched water tile. <br>
      * Values of -1 represent misses.<br>
      * Array coordinates are in the format (y,x). (0,0) is defined to be the top left
      * corner of the board. The y-axis increases down. The x-axis increases right. */
@@ -34,14 +34,14 @@ public class Board {
     }
 
     /** Checks whether the specified board tiles are empty. Begins from a specific tile
-     * and continues a certain number of tiles along one direction. <br>
+     * and walks a certain number of tiles in one direction. <br>
      *
      * @param y         y-coordinate of the beginning tile
      * @param x         x-coordinate of the beginning tile
      * @param direction direction starting from the beginning tile to iterate over
      * @param length    number of tiles to check in the given direction (>= 0)
      *
-     * @return whether all the tiles in the specified range are empty and within
+     * @return whether all the tiles in the specified region are empty and within
      *         bounds. */
     private Boolean checkTilesEmpty(int y, int x, Direction direction, int length) {
         int offset= length - 1;
@@ -65,7 +65,7 @@ public class Board {
     }
 
     /** Sets the value of all specified board tiles to a target value. Begins from a
-     * specific tile and continues a certain number of tiles along one direction. <br>
+     * specific tile and walks a certain number of tiles along one direction. <br>
      *
      * @param y           y-coordinate of the beginning tile
      * @param x           x-coordinate of the beginning tile
@@ -102,8 +102,37 @@ public class Board {
         setTile(y, x, Direction.DOWN, 1, targetValue);
     }
 
-    /** Adds a ship onto the player's gameboard, as well as sets the ship's properties
-     * based on the board position.
+    /** Updates a tile that has been fired at.
+     *
+     * @param y           y-coordinate of the beginning tile
+     * @param x           x-coordinate of the beginning tile
+     * @param targetValue the number to set all tiles in the specified range to
+     *
+     * @return ship that has been hit or null if miss */
+    public Ship attack(int y, int x) {
+        if (board[y][x] > 0) {
+            // ship hit
+            int ship_idx= board[y][x] - 1;
+            ships.get(ship_idx).attack(y, x);
+
+            return ships.get(ship_idx);
+        }
+
+        // miss
+        setTile(y, x, Direction.DOWN, 1, MISS);
+        return null;
+    }
+
+    /** @return whether all ships on this board have sunk */
+    public boolean allShipsSunk() {
+        for (Ship ship : ships) {
+            if (!ship.isSunk()) return false;
+        }
+        return true;
+    }
+
+    /** Adds a ship onto the player's gameboard. Also updates the ship's properties based
+     * on the board position.
      *
      * @param ship      ship to add to the gameboard
      * @param y         y-coordinate of the tile to place one end of ship
@@ -173,7 +202,7 @@ public class Board {
                     sb.append(" _ ");
                     break;
                 case MISS:
-                    sb.append(" M ");
+                    sb.append(" O ");
                     break;
                 default: // ship
                     int shipIndex= line[j] - 1;
