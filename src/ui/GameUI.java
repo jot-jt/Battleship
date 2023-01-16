@@ -57,9 +57,9 @@ public class GameUI {
     private static void executeTurn(Scanner scan, Player current, Player enemy) {
         // Make Header
         String header= String.format("%s's TURN", current.getName());
-        System.out.println("====================");
+        System.out.println("\n\n====================");
         System.out.println(header);
-        System.out.println("====================\n\n");
+        System.out.println("====================");
 
         // Print boards
         System.out.println("Enemy board:");

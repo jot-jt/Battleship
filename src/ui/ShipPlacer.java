@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 import gamelogic.Direction;
 import gamelogic.Player;
+import gamelogic.ships.AircraftCarrier;
+import gamelogic.ships.Battleship;
+import gamelogic.ships.Cruiser;
 import gamelogic.ships.Destroyer;
 import gamelogic.ships.Ship;
 import gamelogic.ships.Submarine;
@@ -17,13 +20,13 @@ public class ShipPlacer {
      *         Submarines */
     private static ArrayList<Ship> generateShips() {
         ArrayList<Ship> unplaced_ships= new ArrayList<>();
-//        unplaced_ships.add(new AircraftCarrier());
-//        unplaced_ships.add(new Battleship());
-//        unplaced_ships.add(new Cruiser());
-//        unplaced_ships.add(new Destroyer());
+        unplaced_ships.add(new AircraftCarrier());
+        unplaced_ships.add(new Battleship());
+        unplaced_ships.add(new Cruiser());
+        unplaced_ships.add(new Destroyer());
         unplaced_ships.add(new Destroyer());
         unplaced_ships.add(new Submarine());
-//        unplaced_ships.add(new Submarine());
+        unplaced_ships.add(new Submarine());
         return unplaced_ships;
     }
 
